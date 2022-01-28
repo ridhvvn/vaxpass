@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Scanner
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,5 +13,32 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-button expand="full" (click)="startScan()">
+    <ion-icon slot="start" ></ion-icon>
+    Start scan
+  </ion-button>
+   
+  <ion-button expand="full" (click)="reset()" color="warning" *ngIf="scanResult">
+    <ion-icon slot="start" name="refresh"></ion-icon>
+    Reset
+  </ion-button>
+
+  <video #video [hidden]="!scanActive" width="100%"></video>
+  <canvas #canvas hidden></canvas>
+  
+  <ion-button expand="full" (click)="stopScan()" *ngIf="scanActive">
+    <ion-icon slot="start" name="close"></ion-icon>
+    Stop scan
+  </ion-button>
+
+  <ion-card *ngIf="scanResult">
+    <ion-card-header>
+      <ion-card-title>QR Code</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+    {{ scanResult }}
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
