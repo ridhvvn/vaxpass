@@ -1,2 +1,2 @@
 # vaxpass
-ionic base template. my first git push
+worked QR scanner using jsQr plugin (Javascript)
