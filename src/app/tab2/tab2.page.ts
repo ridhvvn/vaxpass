@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import jsQR from 'jsqr';
+import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx/';
 
 @Component({
   selector: 'app-tab2',
@@ -18,13 +19,15 @@ export class Tab2Page {
   canvasElement: any;
   canvasContext: any;
 
-  constructor() {}
+  constructor(private androidPermissions: AndroidPermissions) {}
 
   ngAfterViewInit() {
     this.videoElement = this.video.nativeElement;
     this.canvasElement  = this.canvas.nativeElement;
     this.canvasContext = this.canvasElement.getContext('2d');
   }
+
+  
 
   async startScan(){
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -37,6 +40,14 @@ export class Tab2Page {
   }
 
   scan() {
+
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+      result => console.log('Has permission?',result.hasPermission),
+      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
+    );
+    
+    this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.CAMERA, this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
+
     console.log('SCAN');
 
     if(this.videoElement.readyState === this.videoElement.HAVE_ENOUGH_DATA){
