@@ -6,14 +6,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true"   [scrollEvents]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Tab 2</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-button expand="full" (click)="startScan()">
+  <ion-button expand="full" [hidden]="scanActive" (click)="startScan()">
     <ion-icon slot="start" ></ion-icon>
     Start scan
   </ion-button>
@@ -22,14 +22,14 @@
     <ion-icon slot="start" name="refresh"></ion-icon>
     Reset
   </ion-button>
-
-  <video #video [hidden]="!scanActive" width="100%"></video>
-  <canvas #canvas hidden></canvas>
   
   <ion-button expand="full" (click)="stopScan()" *ngIf="scanActive">
     <ion-icon slot="start" name="close"></ion-icon>
     Stop scan
   </ion-button>
+
+  <video #video [hidden]="!scanActive" width="100%"></video>
+  <canvas #canvas hidden></canvas>
 
   <ion-card *ngIf="scanResult">
     <ion-card-header>

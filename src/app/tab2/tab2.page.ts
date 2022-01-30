@@ -37,6 +37,8 @@ export class Tab2Page {
     this.videoElement.setAttribute('playsinline', true);
     this.videoElement.play();
     requestAnimationFrame(this.scan.bind(this));
+    this.scanActive = true;
+
   }
 
   scan() {
@@ -51,7 +53,6 @@ export class Tab2Page {
     console.log('SCAN');
 
     if(this.videoElement.readyState === this.videoElement.HAVE_ENOUGH_DATA){
-      this.scanActive = true;
 
       this.canvasElement.height = this.videoElement.videoHeight;
       this.canvasElement.width = this.videoElement.videoWidth;
@@ -80,16 +81,15 @@ export class Tab2Page {
       if (code) {
         this.scanActive = false;
         this.scanResult = code.data;
-
+  
       } else {
-        if (this.scanActive) {
-
-        }
-        requestAnimationFrame(this.scan.bind(this));
+        if (this.scanActive){
+        requestAnimationFrame(this.scan.bind(this));}
       }
 
     } else {
-      requestAnimationFrame(this.scan.bind(this));
+       if (this.scanActive){
+      requestAnimationFrame(this.scan.bind(this));}
     }
   }
 
