@@ -39,6 +39,7 @@ export class Tab2Page {
     requestAnimationFrame(this.scan.bind(this));
     this.scanActive = true;
 
+    
   }
 
   scan() {
