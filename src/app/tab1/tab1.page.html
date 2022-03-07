@@ -15,10 +15,6 @@
 
   <ion-card>
 
-    <ion-item>
-      <ion-label position="floating">Nama</ion-label>
-      <ion-input [(ngModel)]="nama"></ion-input>
-    </ion-item>
 
     <ion-item>
       <ion-label position="floating">No. IC</ion-label>
@@ -32,7 +28,6 @@
       <ion-icon slot="start" name="qr-code-outline"></ion-icon>
       Generate QR
     </ion-button>
-
   </ion-card>
 
   <ion-card *ngIf="generated">
@@ -47,5 +42,13 @@
       <ion-img [src]="generated"></ion-img>    
     </ion-card-content>
   </ion-card>
+  
+  <ion-list>
+    <ion-item *ngFor="let note of notes">
+        {{note.nama}}
+        {{note.status}}
+        {{note.ic}}
+    </ion-item>
+  </ion-list>
   
 </ion-content>

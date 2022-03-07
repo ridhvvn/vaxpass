@@ -1,0 +1,35 @@
+<div>
+  <h3 class="ion-padding">Edit Data</h3>
+</div>
+
+<ion-content>
+  
+  <div *ngIf="note">
+    
+    <ion-item>
+      <ion-label position="stacked">IC</ion-label>
+      <ion-input [(ngModel)]="note.ic"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="stacked">Nama</ion-label>
+      <ion-input [(ngModel)]="note.nama"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Status</ion-label>
+      <ion-input [(ngModel)]="note.status"></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-button expand="block" color="success" (click)="updateid()">
+    <ion-icon name="save" slot="start"></ion-icon>
+    Update
+  </ion-button>
+
+  <ion-button expand="block" color="danger" (click)="deleteid()">
+    <ion-icon name="trash" slot="start"></ion-icon>
+    Delete
+  </ion-button>
+
+</ion-content>

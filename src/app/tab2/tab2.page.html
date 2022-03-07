@@ -27,7 +27,9 @@
     Stop scan
   </ion-button>
 
-  <video #video [hidden]="!scanActive" width="100%"></video>
+  <video #video 
+    [hidden]="!scanActive" width="100%">
+  </video>
   <canvas #canvas hidden></canvas>
 
   <ion-card *ngIf="scanResult">
@@ -35,9 +37,19 @@
       <ion-card-title>QR Code</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content>
-    {{ scanResult }}
-    </ion-card-content>
+    <ion-searchbar hidden
+        [(ngModel)]="filterTerm"
+    ></ion-searchbar>
+
+    <ion-item *ngFor="let vaksin of notes | filter:filterTerm">
+      <ion-card-content>
+        <h1>{{vaksin.nama}}</h1>
+        <p>{{vaksin.ic}}</p>
+        <p>{{vaksin.status}}</p>
+        </ion-card-content>
+    </ion-item>>    
+    
   </ion-card>
+
 
 </ion-content>

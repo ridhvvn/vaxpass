@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import QRCode from 'qrcode';
+import { ServicesService } from '../services.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,8 +8,7 @@ import QRCode from 'qrcode';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-
-  nama = '';
+  
   ic = '';
   generated = '';
 
@@ -16,7 +16,14 @@ export class Tab1Page {
     return this.generated !== '';
   }
 
-  constructor() {}
+  notes = [];
+  id = [];
+
+  constructor(private dataService: ServicesService) {
+    this.dataService.getid().subscribe(res => {
+      this.id = res; 
+    })
+  }
 
   generate() {
     const qrcode = QRCode;
@@ -24,6 +31,10 @@ export class Tab1Page {
     qrcode.toDataURL(self.ic, { errorCorrectionLevel: 'H' }, function (err, url) {
       self.generated = url;
     })
+  }
+
+  openNote(note){
+    this.notes = this.id;
   }
 
 }

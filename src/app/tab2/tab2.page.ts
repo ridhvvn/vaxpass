@@ -1,6 +1,8 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import jsQR from 'jsqr';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx/';
+import { Note, ServicesService } from '../services.service';
+
 
 @Component({
   selector: 'app-tab2',
@@ -12,6 +14,9 @@ export class Tab2Page {
   scanActive = false;
   scanResult = null;
 
+  filterTerm: number;
+  notes: Note[] = [];
+
   @ViewChild('video', { static: false }) video: ElementRef;
   @ViewChild('canvas', { static: false }) canvas: ElementRef;
 
@@ -19,7 +24,15 @@ export class Tab2Page {
   canvasElement: any;
   canvasContext: any;
 
-  constructor(private androidPermissions: AndroidPermissions) {}
+  constructor(private androidPermissions: AndroidPermissions, private dataService: ServicesService, private cd: ChangeDetectorRef) {}
+
+  async ngOnInit() {
+
+    this.dataService.getid().subscribe(res => {
+      this.notes = res;
+      this.cd.detectChanges();
+    });
+  }
 
   ngAfterViewInit() {
     this.videoElement = this.video.nativeElement;
@@ -82,6 +95,7 @@ export class Tab2Page {
       if (code) {
         this.scanActive = false;
         this.scanResult = code.data;
+        this.filterTerm = this.scanResult;
   
       } else {
         if (this.scanActive){

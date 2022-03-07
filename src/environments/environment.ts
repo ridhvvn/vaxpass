@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase : {
+    apiKey: "AIzaSyAlFyVkFLCZXrtp4JPJEzIr2Qw8-Hqr_FE",
+    authDomain: "vaxpass-bddac.firebaseapp.com",
+    projectId: "vaxpass-bddac",
+    storageBucket: "vaxpass-bddac.appspot.com",
+    messagingSenderId: "245430502608",
+    appId: "1:245430502608:web:65c8c6135f1ab96a524ad5"
+  }
 };
 
 /*

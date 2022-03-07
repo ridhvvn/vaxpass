@@ -1,0 +1,22 @@
+<ion-content>
+  <router-outlet>
+    <ion-icon name="arrow-back-outline" class="ion-padding" routerLink="/tabs/tab3"></ion-icon>
+  </router-outlet>
+
+  <div class="main-section">
+
+    <h3 class="ion-padding">Add/Edit Data</h3>
+
+    <div class="form ion-padding ion-margin">
+
+      <ion-select interface="action-sheet" placeholder="Status Vaksinasi">
+      <ion-select-option value="true">Sudah</ion-select-option>
+      <ion-select-option value="false">Belum</ion-select-option>
+      </ion-select>
+
+      <ion-input [(ngModel)]="note.nama" placeholder="Nama"></ion-input>
+      <ion-input [(ngModel)]="note.ic" placeholder="IC" type="number"></ion-input>
+      <ion-button color="dark" (click)="addNote()">Add New</ion-button>
+    </div>
+  </div>
+  </ion-content>
