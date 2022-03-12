@@ -3,7 +3,6 @@ import jsQR from 'jsqr';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx/';
 import { Note, ServicesService } from '../services.service';
 
-
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -13,8 +12,11 @@ export class Tab2Page {
 
   scanActive = false;
   scanResult = null;
+  scanComplete = false;
+  scanRejected = null;
+  scanRejectedOut = false;
 
-  filterTerm: number;
+  ICsearch: number;
   notes: Note[] = [];
 
   @ViewChild('video', { static: false }) video: ElementRef;
@@ -93,10 +95,25 @@ export class Tab2Page {
       console.log('code: ', code);
 
       if (code) {
-        this.scanActive = false;
         this.scanResult = code.data;
-        this.filterTerm = this.scanResult;
-  
+        this.ICsearch = this.scanResult;
+        this.scanActive = false; //stop scan QR dgn kamera
+        var int = parseInt(this.scanResult); //convert int
+
+        console.log("scanResult:", this.scanResult);
+        console.log("isInteger: ", Number.isInteger(int));
+
+        if(this.ICsearch.toString().length == 12 && Number.isInteger(int) == true){
+            this.scanComplete = true;
+            this.scanRejectedOut = false;
+
+        }else {
+          this.scanComplete = false;
+          this.scanRejected = 'QR bukan IC';
+          this.scanRejectedOut = true;
+
+        }
+         
       } else {
         if (this.scanActive){
         requestAnimationFrame(this.scan.bind(this));}
@@ -114,5 +131,9 @@ export class Tab2Page {
 
   reset(){
     this.scanResult = null;
-  }
+    this.scanComplete = false;
+    this.scanRejectedOut = false;
+
+  } 
+
 }

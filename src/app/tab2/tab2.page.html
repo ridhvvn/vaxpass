@@ -32,24 +32,37 @@
   </video>
   <canvas #canvas hidden></canvas>
 
-  <ion-card *ngIf="scanResult">
+  <ion-card *ngIf="scanComplete">
     <ion-card-header>
       <ion-card-title>QR Code</ion-card-title>
     </ion-card-header>
 
     <ion-searchbar hidden
-        [(ngModel)]="filterTerm"
+        [(ngModel)]="ICsearch"
     ></ion-searchbar>
 
-    <ion-item *ngFor="let vaksin of notes | filter:filterTerm">
+    <ion-item *ngFor="let vaksin of notes | filter:ICsearch">
       <ion-card-content>
         <h1>{{vaksin.nama}}</h1>
         <p>{{vaksin.ic}}</p>
         <p>{{vaksin.status}}</p>
         </ion-card-content>
-    </ion-item>>    
+    </ion-item> 
+    
+    <ion-item *ngIf="(notes | filter: ICsearch).length == 0">
+      <p>Tiada dlm database</p>
+    </ion-item>
     
   </ion-card>
+  
+  <ion-card *ngIf="scanRejectedOut">
+  
+    <ion-card-content>
+      <h1>{{scanRejected}}</h1>
+    </ion-card-content>
 
+  </ion-card>
+  
+  
 
 </ion-content>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import QRCode from 'qrcode';
-import { ServicesService } from '../services.service';
+import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-tab1',
@@ -9,32 +11,62 @@ import { ServicesService } from '../services.service';
 })
 export class Tab1Page {
   
-  ic = '';
+  IC = '';
+  b = '';
   generated = '';
+  data: any;
 
-  genResult() {
-    return this.generated !== '';
+  constructor(private storage: Storage, private router: Router) {
   }
 
-  notes = [];
-  id = [];
+  ngOnInit () {
+    this.data = {};
+    this.getValue("ic");
 
-  constructor(private dataService: ServicesService) {
-    this.dataService.getid().subscribe(res => {
-      this.id = res; 
-    })
-  }
+    this.data.ic = this.b
+    this.b = this.IC
+    console.log('Value QR ' + this.IC);
 
-  generate() {
+
     const qrcode = QRCode;
     const self = this;
-    qrcode.toDataURL(self.ic, { errorCorrectionLevel: 'H' }, function (err, url) {
+    qrcode.toDataURL(self.IC, { errorCorrectionLevel: 'H' }, function (err, url) {
       self.generated = url;
     })
+
   }
 
-  openNote(note){
-    this.notes = this.id;
-  }
+  // get a key/value pair
+  getValue(key: string) {
+    this.storage.get(key).then((val) => {
+      console.log('get ' + key + ' ', val);
+      this.data[key] = "";
+      this.data[key] = val;
+  }).catch((error) => {
+    console.log('get error for ' + key + '', error);
+  });
+}
 
+// Remove a key/value pair
+removeKey(key: string) {
+  this.storage.remove(key).then(() => {
+    console.log('removed ' + key);
+    this.data[key] = "";
+    this.router.navigateByUrl('tabs/tab3');
+
+  }).catch((error) => {
+    console.log('removed error for ' + key + '', error);
+  })
+  ;
+}
+
+generate() {
+  const qrcode = QRCode;
+    const self = this;
+    console.log('Value QR ' + this.IC);
+    qrcode.toDataURL(self.IC, { errorCorrectionLevel: 'H' }, function (err, url) {
+      self.generated = url;
+    })
+
+}
 }
