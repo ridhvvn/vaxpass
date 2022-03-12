@@ -1,17 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Scanner
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true" [scrollEvents]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <div class="main-section">
+
+    <h3 class="ion-padding">QR Scanner</h3>
 
   <ion-button expand="full" [hidden]="scanActive" (click)="startScan()">
     Start scan
@@ -64,5 +56,5 @@
   </ion-card>
   
   
-
+  </div>
 </ion-content>

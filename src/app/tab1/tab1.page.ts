@@ -24,7 +24,7 @@ export class Tab1Page {
     this.getValue("ic");
 
     this.data.ic = this.b
-    this.b = this.IC
+    this.b = this.IC //didnt work
     console.log('Value QR ' + this.IC);
 
 
@@ -52,7 +52,7 @@ removeKey(key: string) {
   this.storage.remove(key).then(() => {
     console.log('removed ' + key);
     this.data[key] = "";
-    this.router.navigateByUrl('tabs/tab3');
+    this.router.navigateByUrl('tab3');
 
   }).catch((error) => {
     console.log('removed error for ' + key + '', error);

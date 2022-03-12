@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -13,29 +13,43 @@ export class Tab3Page {
 
   data: any;
   ic = '';
-  value = false;
+  ICformGroup: FormGroup;
+  isSubmitted = false;
 
-  constructor(private storage: Storage, private router: Router) {
+  constructor(private storage: Storage, private router: Router, public formBuilder: FormBuilder) {
     this.data = {};
     this.removeKey("ic");
   }
 
-  insertValue() {
+  ngOnInit() {
+    this.ICformGroup = this.formBuilder.group({
+      formIC: ['', [Validators.required, Validators.minLength(12), Validators.pattern('^[0-9]+$'), Validators.maxLength(12)]],
+   })
+  }
 
-    //Set Integer Value
-    this.setValue("ic", this.ic);
-    this.value = true;
-    this.router.navigateByUrl('tabs/tab1');
+  get errorControl() {
+    return this.ICformGroup.controls;
+  }
 
+  submitForm() {
+    this.isSubmitted = true;
+
+    if (this.ICformGroup.valid) {
+      //Set Integer Value
+      this.ic = this.ICformGroup.get('formIC').value;
+      this.setValue("ic", this.ic);
+      this.router.navigateByUrl('tab1');
+      console.log("Ic value:" + this.ic)
+
+    } else {
+      console.log(this.ICformGroup.value)
+    }
   }
 
   // set a key/value
   setValue(key: string, value: any) {
     this.storage.set(key, value).then((response) => {
       console.log('set' + key + ' ', response);
-
-      //get Value Saved in key
-      this.getValue(key);
 
     }).catch((error) => {
       console.log('set error for ' + key + ' ', error);
@@ -62,4 +76,5 @@ export class Tab3Page {
       console.log('removed error for ' + key + '', error);
     });
   }
+
 }
