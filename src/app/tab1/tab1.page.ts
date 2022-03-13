@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import QRCode from 'qrcode';
+//import { Storage } from '@capacitor/storage';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
+
 export class Tab1Page {
   
   IC = '';
@@ -23,26 +25,24 @@ export class Tab1Page {
     this.data = {};
     this.getValue("ic");
 
-    this.data.ic = this.b
-    this.b = this.IC //didnt work
+    this.storage.get('ic').then((val) => {
+      console.log('val ' + val);
+      this.IC = val;
+      });
+
     console.log('Value QR ' + this.IC);
 
-
-    const qrcode = QRCode;
-    const self = this;
-    qrcode.toDataURL(self.IC, { errorCorrectionLevel: 'H' }, function (err, url) {
-      self.generated = url;
-    })
-
+    this.generate;
   }
-
+  
   // get a key/value pair
   getValue(key: string) {
     this.storage.get(key).then((val) => {
       console.log('get ' + key + ' ', val);
       this.data[key] = "";
       this.data[key] = val;
-  }).catch((error) => {
+
+    }).catch((error) => {
     console.log('get error for ' + key + '', error);
   });
 }
@@ -60,7 +60,7 @@ removeKey(key: string) {
   ;
 }
 
-generate() {
+async generate() {
   const qrcode = QRCode;
     const self = this;
     console.log('Value QR ' + this.IC);
@@ -68,5 +68,5 @@ generate() {
       self.generated = url;
     })
 
-}
+  }
 }

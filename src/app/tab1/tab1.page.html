@@ -1,6 +1,14 @@
 
 <ion-content [fullscreen]="true" [scrollEvents]="true">
-  
+
+  <router-outlet>
+    <ion-icon name="log-in-outline" class="ion-padding" (click)="removeKey('ic')">change IC</ion-icon>
+  </router-outlet>
+
+  <router-outlet>
+    <ion-icon name="scan-outline" class="ion-padding" animated="true" routerLink="/tab2">Scan QR</ion-icon>
+  </router-outlet>
+
   <div class="main-section">
 
     <h3 class="ion-padding">Home</h3>
@@ -13,23 +21,13 @@
          , this is your homepage. Show this QR to the examiner.</h1>
 
     </div>
-    <ion-card>
-
-      <ion-item>
-        <ion-label position="floating">No. IC</ion-label>
-        <ion-input [(ngModel)]="IC">
-        </ion-input>
-      </ion-item>
-
-    </ion-card>
+   
     <ion-card>
       <ion-button fill="clear" expand="full" (click)="generate()">
         <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-        Generate QR
+        Show QR
       </ion-button>
     </ion-card>
-
-    <ion-button fill="clear" expand="full" (click)="removeKey('ic')">New User</ion-button>
 
     <ion-card *ngIf="generated">
       <ion-card-header>

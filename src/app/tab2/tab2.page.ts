@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/co
 import jsQR from 'jsqr';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx/';
 import { Note, ServicesService } from '../services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -26,7 +27,7 @@ export class Tab2Page {
   canvasElement: any;
   canvasContext: any;
 
-  constructor(private androidPermissions: AndroidPermissions, private dataService: ServicesService, private cd: ChangeDetectorRef) {}
+  constructor(private androidPermissions: AndroidPermissions, private dataService: ServicesService, private cd: ChangeDetectorRef, private router: Router) {}
 
   async ngOnInit() {
 
@@ -63,8 +64,13 @@ export class Tab2Page {
       result => console.log('Has permission?',result.hasPermission),
       err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
     );
+
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.INTERNET).then(
+      result => console.log('Has permission?',result.hasPermission),
+      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.INTERNET)
+    );
     
-    this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.CAMERA, this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
+    this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.CAMERA, this.androidPermissions.PERMISSION.INTERNET, this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
 
     console.log('SCAN');
 
@@ -135,5 +141,9 @@ export class Tab2Page {
     this.scanRejectedOut = false;
 
   } 
+
+  back() {
+    this.router.navigateByUrl('tab1');
+  }
 
 }

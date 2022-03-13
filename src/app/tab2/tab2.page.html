@@ -1,6 +1,10 @@
 
 <ion-content [fullscreen]="true" [scrollEvents]="true">
   
+  <router-outlet>
+    <ion-icon name="arrow-back-outline" class="ion-padding" (click)="back()"></ion-icon>
+  </router-outlet>
+
   <div class="main-section">
 
     <h3 class="ion-padding">QR Scanner</h3>
