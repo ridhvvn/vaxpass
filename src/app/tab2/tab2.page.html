@@ -40,7 +40,7 @@
           <p class="a">IC NUMBER</p>
           <p class="b">{{vaksin.ic}}</p>
           <p class="c" >{{vaksin.status === 'dah' ? 'Completed vaccine doses' : 'Not yet vaccinated' }}</p>
-        </ion-card-content>
+        </ion-card-content><br>
 
         <img class="img-stat" [src]="vaksin.status ==='dah' ? '/assets/icon/dah.png' : '/assets/icon/belum.png'"> 
         
@@ -49,7 +49,7 @@
       <!--kalau filter 0-->
       <ion-item *ngIf="(notes | filter: ICsearch).length == 0">
         <ion-card-content>
-          <p>NRIC doesn't exist in the database</p>
+          <h1>NRIC doesn't exist in the database</h1>
         </ion-card-content>
       </ion-item>
     </ion-card>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Storage } from '@ionic/storage';
+import { StatusBar } from '@capacitor/status-bar';
 
 @Component({
   selector: 'app-tab3',
@@ -25,6 +26,10 @@ export class Tab3Page {
     this.ICformGroup = this.formBuilder.group({
       formIC: ['', [Validators.required, Validators.minLength(12), Validators.pattern('^[0-9]+$'), Validators.maxLength(12)]],
    })
+
+   StatusBar.setOverlaysWebView({overlay:false})
+   StatusBar.setBackgroundColor({color:'#e89dff'})
+
   }
 
   get errorControl() {
