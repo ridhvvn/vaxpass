@@ -1,39 +1,46 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
 
 <ion-content [fullscreen]="true" [scrollEvents]="true">
 
-  <router-outlet>
-    <ion-icon name="log-in-outline" class="ion-padding" (click)="removeKey('ic')">change IC</ion-icon>
-  </router-outlet>
+  <ion-header class="ion-no-border">
+    <ion-toolbar class="custom-font">
+        <ion-icon class="ion-padding" name="log-in-outline" (click)="removeKey('ic')"></ion-icon>
+        <ion-icon name="scan-outline" slot="end" class="ion-padding" animated="true" routerLink="/tab2">Scan QR</ion-icon>
+    </ion-toolbar>
+  </ion-header>
 
-  <router-outlet>
-    <ion-icon name="scan-outline" class="ion-padding" animated="true" routerLink="/tab2">Scan QR</ion-icon>
-  </router-outlet>
 
-  <div class="main-section">
+  <div class="div">
 
-    <h3 class="ion-padding">Home</h3>
+    <h3 class="custom-font">Home</h3>
 
     <div>
-      <h1 class="ion-padding">Hello
-
-         {{data.ic}}
-         
-         , this is your homepage. Show this QR to the examiner.</h1>
-
-    </div>
-   
-    <ion-card>
-      <ion-button fill="clear" expand="full" (click)="generate()">
-        <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-        Show QR
-      </ion-button>
+      <ion-card>
+      <h5 class="custom-font">
+         Hi, this is your homepage. Click the button below to show your QR code.
+         <br>
+         <br>
+         <br>
+      </h5>
     </ion-card>
+    </div>
 
-    <ion-card *ngIf="generated">
+    <ion-button class="custom-font" fill="clear" (click)="generate()" *ngIf="!generated">
+      
+      <b>SHOW QR
+      <br>
+      click here</b>
+      
+      <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+    </ion-button>
+
+    <ion-card class="card" *ngIf="generated">
       <ion-card-header>
-        <ion-card-title>QR Code</ion-card-title>
-        <ion-text color="primary">
-          <p>This is your QR</p>
+        <ion-card-title><b>Scan here</b></ion-card-title>
+        <ion-text>
+          <p>This is your QR, show this code to the examiner to identify your vaccination status in the database.</p>
         </ion-text>
       </ion-card-header>
 

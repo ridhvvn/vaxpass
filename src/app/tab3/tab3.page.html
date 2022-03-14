@@ -1,3 +1,7 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
+
 <ion-content>
  <!-- <router-outlet>
     <ion-icon name="arrow-back-outline" class="ion-padding" routerLink="/tabs/tab1"></ion-icon>
@@ -6,33 +10,37 @@
 
   <div class="main-section">
 
-    <h3 class="ion-padding">Login</h3>
+    <h3 class="custom-font">New User</h3>
+    <p class="a custom-font">Please enter your Malaysian National Registration Identity Card (NRIC) </p>
 
-      <ion-card>
-        <form [formGroup]="ICformGroup" (ngSubmit)="submitForm()" novalidate>
+ 
+        <form id="form" [formGroup]="ICformGroup" (ngSubmit)="submitForm()" novalidate>
 
         <ion-item>
-          <ion-label position="floating">Masukkan IC :</ion-label>
-          <ion-input formControlName="formIC" clear-on-edit=true></ion-input>
+          <ion-label class="floating custom-font" position="floating">IC :</ion-label>
+          <ion-input class="input custom-font" formControlName="formIC" clear-on-edit=true></ion-input>
+        <ion-button></ion-button>
         </ion-item>
         
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.formIC.errors?.required">
+        <span class="error-padding" *ngIf="isSubmitted && errorControl.formIC.errors?.required">
           IC is required.
         </span>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.formIC.errors?.minlength">
+        <span class="error-padding" *ngIf="isSubmitted && errorControl.formIC.errors?.minlength">
           IC should be 12 digit long.
         </span>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.formIC.errors?.pattern">
+        <span class="error-padding" *ngIf="isSubmitted && errorControl.formIC.errors?.pattern">
           IC should be Number.
         </span>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.formIC.errors?.maxlength">
+        <span class="error-padding" *ngIf="isSubmitted && errorControl.formIC.errors?.maxlength">
           IC should be 12 digit long.
         </span>
 
-        <ion-button fill="clear" expand="full" type="submit">Login</ion-button>
+        <ion-button class="custom-font" expand="block" expand="full" type="submit" fill="clear">Save</ion-button>
 
         </form>
-      </ion-card>
+
+        <p class="b custom-font">Your NRIC info will be saved <br> for further verification.  </p>
+
 
   </div>
   </ion-content>

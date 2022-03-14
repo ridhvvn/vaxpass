@@ -1,3 +1,6 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
 
 <ion-content [fullscreen]="true" [scrollEvents]="true">
   
@@ -5,60 +8,69 @@
     <ion-icon name="arrow-back-outline" class="ion-padding" (click)="back()"></ion-icon>
   </router-outlet>
 
-  <div class="main-section">
+  <div class="div">
 
-    <h3 class="ion-padding">QR Scanner</h3>
+    <h3 class="custom-font">Scanner</h3>
 
-  <ion-button expand="full" [hidden]="scanActive" (click)="startScan()">
-    Start scan
-  </ion-button>
-   
-  <ion-button expand="full" (click)="reset()" color="warning" *ngIf="scanResult">
-    <ion-icon slot="start" name="refresh"></ion-icon>
-    Reset
-  </ion-button>
-  
-  <ion-button expand="full" (click)="stopScan()" *ngIf="scanActive">
-    <ion-icon slot="start" name="close"></ion-icon>
-    Stop scan
-  </ion-button>
+    <ion-button fill="clear" [hidden]="scanActive" (click)="startScan()">
+      Scan
+    </ion-button>   
+    
+    <ion-button fill="clear" (click)="stopScan()" *ngIf="scanActive">
+      <ion-icon slot="start" name="close"></ion-icon>
+      Stop scan
+    </ion-button>
+
+    <ion-card *ngIf="scanComplete">
+      <ion-card-header class="custom-font">
+        <ion-card-title>Results</ion-card-title>
+      </ion-card-header>
+
+      <ion-searchbar hidden
+          [(ngModel)]="ICsearch"
+      ></ion-searchbar>
+
+      <!--kalau successful-->
+      <ion-item *ngFor="let vaksin of notes | filter:ICsearch">
+        <ion-card-content>
+          <p class="a">NAME</p>
+          <h1>{{vaksin.nama}}</h1>
+          <br>
+
+          <p class="a">IC NUMBER</p>
+          <p class="b">{{vaksin.ic}}</p>
+          <p class="c" >{{vaksin.status === 'dah' ? 'Completed vaccine doses' : 'Not yet vaccinated' }}</p>
+        </ion-card-content>
+
+        <img class="img-stat" [src]="vaksin.status ==='dah' ? '/assets/icon/dah.png' : '/assets/icon/belum.png'"> 
+        
+      </ion-item> 
+      
+      <!--kalau filter 0-->
+      <ion-item *ngIf="(notes | filter: ICsearch).length == 0">
+        <ion-card-content>
+          <p>NRIC doesn't exist in the database</p>
+        </ion-card-content>
+      </ion-item>
+    </ion-card>
+      
+      <!--fail (condition .ts)-->
+      <ion-card *ngIf="scanRejectedOut">
+        <ion-card-content>
+          <p>QR code is in a wrong format.</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-button class="btn-reset" fill="clear" (click)="reset()" *ngIf="scanResult">
+        <ion-icon slot="start" name="refresh"></ion-icon>
+        Reset
+      </ion-button>
+
+  </div>
 
   <video #video 
     [hidden]="!scanActive" width="100%">
   </video>
   <canvas #canvas hidden></canvas>
 
-  <ion-card *ngIf="scanComplete">
-    <ion-card-header>
-      <ion-card-title>QR Code</ion-card-title>
-    </ion-card-header>
-
-    <ion-searchbar hidden
-        [(ngModel)]="ICsearch"
-    ></ion-searchbar>
-
-    <ion-item *ngFor="let vaksin of notes | filter:ICsearch">
-      <ion-card-content>
-        <h1>{{vaksin.nama}}</h1>
-        <p>{{vaksin.ic}}</p>
-        <p>{{vaksin.status}}</p>
-        </ion-card-content>
-    </ion-item> 
-    
-    <ion-item *ngIf="(notes | filter: ICsearch).length == 0">
-      <p>Tiada dlm database</p>
-    </ion-item>
-    
-  </ion-card>
-  
-  <ion-card *ngIf="scanRejectedOut">
-  
-    <ion-card-content>
-      <h1>{{scanRejected}}</h1>
-    </ion-card-content>
-
-  </ion-card>
-  
-  
-  </div>
 </ion-content>

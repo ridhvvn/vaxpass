@@ -3,6 +3,7 @@ import jsQR from 'jsqr';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx/';
 import { Note, ServicesService } from '../services.service';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -27,7 +28,7 @@ export class Tab2Page {
   canvasElement: any;
   canvasContext: any;
 
-  constructor(private androidPermissions: AndroidPermissions, private dataService: ServicesService, private cd: ChangeDetectorRef, private router: Router) {}
+  constructor(private androidPermissions: AndroidPermissions, private dataService: ServicesService, private cd: ChangeDetectorRef, private router: Router, private alertctrl: AlertController) {}
 
   async ngOnInit() {
 
@@ -35,6 +36,8 @@ export class Tab2Page {
       this.notes = res;
       this.cd.detectChanges();
     });
+
+    this.startScan();
   }
 
   ngAfterViewInit() {

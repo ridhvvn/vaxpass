@@ -1,0 +1,97 @@
+    .custom-font {
+        font-family: 'Titillium Web', sans-serif;
+    }
+
+    ion-toolbar {
+        --background:I#f5f5f3;
+    }
+    ion-content {
+        --background:#ffffff;
+   
+        h3 {
+            display: flex;
+            flex-direction: column;
+            font-weight: 700;
+            font-size: 40px;
+            color:#490b6d;
+            margin-top: 45%;
+            text-shadow: #490b6d;
+            padding-left: 50px;
+            }
+        }
+
+        .a {
+            color:#868686;
+            margin-top: 5%;
+            padding-left: 40px;
+            padding-right: 20px;
+            font-weight: 700;
+        }
+
+        .b {
+            color:#acacac;
+            margin-top: 5%;
+            text-align: center;
+        }
+
+        .floating {
+            background: transparent;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+    ion-item {
+        border-radius: 15px;
+        height: 65px;
+        --highlight-height: 0px;
+        box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.356);
+
+    }
+
+    #form {
+        margin-top: 15%;
+        padding-left: 30px;
+        padding-right: 30px;
+
+
+        ion-button {
+            background-color: #5e60ce;
+            font-weight: 700;
+            margin-top: 20px;
+            height: 48px;
+            font-size: 18px;
+            text-transform: initial;
+            border-radius: 15px;
+            color: rgb(255, 255, 255);
+            box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.356);
+
+        }
+
+        .input {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.2;
+            border-radius: 15px;
+
+        }
+
+        .error-padding {
+            font-weight: 70;
+            font-size: 15px;
+            display: flex;
+            padding-left: 20px;
+            margin-top: 2%;
+            color:  #010100;
+            }
+    }
+
+
+//#64dfdf
+//#48bfe3
+//#5e60ce
+//#490b6d
