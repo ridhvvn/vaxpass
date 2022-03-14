@@ -4,6 +4,7 @@ import QRCode from 'qrcode';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { StatusBar } from '@capacitor/status-bar';
 
 
 @Component({
@@ -34,6 +35,9 @@ export class Tab1Page {
     console.log('Value QR ' + this.IC);
 
     this.generate;
+
+    StatusBar.setOverlaysWebView({overlay:false})
+    StatusBar.setBackgroundColor({color:'#490b6d'})
   }
   
   async scanAlert() {
