@@ -7,7 +7,7 @@
   <ion-header class="ion-no-border">
     <ion-toolbar class="custom-font">
         <ion-icon class="ion-padding" name="log-in-outline" (click)="removeKey('ic')"></ion-icon>
-        <ion-icon name="scan-outline" slot="end" class="ion-padding" animated="true" routerLink="/tab2">Scan QR</ion-icon>
+        <ion-icon name="scan-outline" slot="end" class="ion-padding" animated="true" (click)="scanAlert()" >Scan QR</ion-icon>
     </ion-toolbar>
   </ion-header>
 
@@ -49,4 +49,13 @@
       </ion-card-content>
     </ion-card>
   </div>
+
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <p class="ion-text-center custom-font">This is a FYP2 project for FSTM <br> session II 2021/2022
+    <a href="https://github.com/ridhvvn/vaxpass.git">Git
+
+    </a>
+  </p>
+</ion-footer>

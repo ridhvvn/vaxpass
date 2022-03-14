@@ -3,6 +3,7 @@ import QRCode from 'qrcode';
 //import { Storage } from '@capacitor/storage';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class Tab1Page {
   generated = '';
   data: any;
 
-  constructor(private storage: Storage, private router: Router) {
+  constructor(private storage: Storage, private router: Router, private alertController: AlertController) {
   }
 
   ngOnInit () {
@@ -35,6 +36,22 @@ export class Tab1Page {
     this.generate;
   }
   
+  async scanAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Use QR scanner?',
+      message: 'Check vaccination status through other phones QR code.',
+      buttons: [ {
+        text: 'Okay',
+        id: 'confirm-button',
+        handler: () => {
+          this.router.navigateByUrl('tab2');
+        }
+      } ]
+    });
+    await alert.present();
+  }
+
   // get a key/value pair
   getValue(key: string) {
     this.storage.get(key).then((val) => {
